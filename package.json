@@ -7,7 +7,9 @@
   ],
   "dependencies": {
     "youmeb": "*",
-    "youmeb-api-angularjs": "*"
+    "youmeb-api-angularjs": "*",
+    "youmeb-sequelize": "0.0.7",
+    "mysql": "~2.0.0-rc2"
   },
   "license": "MIT"
 }
