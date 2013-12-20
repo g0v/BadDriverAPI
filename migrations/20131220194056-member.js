@@ -28,6 +28,10 @@ module.exports = {
             type: DataTypes.STRING(10),
             allowNull: false
           },
+          tk: {
+            type: DataTypes.TEXT,
+            allowNull: false
+          },
           updateFiles: {
           	type: DataTypes.TEXT,
             allowNull: false

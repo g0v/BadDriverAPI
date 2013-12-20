@@ -7,34 +7,56 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
+    urlid: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
-    email: {
-    	type: DataTypes.TEXT,
+    number: {
+      type: DataTypes.STRING(10),
       allowNull: false,
-      unique: true
+    },
+    city: {
+      type: DataTypes.STRING(15),
+      allowNull: false
+    },
+    location: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    like: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true
+    },
+    likeIds: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    dislike: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true
+    },
+    dislikeIds: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    proposer: {
+      type: DataTypes.STRING(20),
+      allowNull: false
+    },
+    proposerid: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
     },
     from: {
-      type: DataTypes.STRING(10),
-      allowNull: false
+      type: DataTypes.STRING(20),
+      allowNull: false,
     },
-    thirdId: {
-      type: DataTypes.STRING(30),
-      allowNull: false
-    },
-    updateFiles:{
-    	type: DataTypes.TEXT,
-      allowNull: false
-    },
-    like:{
-    	type: DataTypes.TEXT,
-      allowNull: false
-    },
-    dislike:{
-    	type: DataTypes.TEXT,
+    tk: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
     createdAt: {

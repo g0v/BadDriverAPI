@@ -7,6 +7,12 @@ module.exports = function (done) {
   this.express(function (app, express) {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
+    app.use(function(req, res, next) {
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
+      res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      return next();
+    });
     app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());

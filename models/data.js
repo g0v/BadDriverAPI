@@ -9,8 +9,7 @@ module.exports = function(sequelize, DataTypes) {
   },
   urlid: {
     type: DataTypes.TEXT,
-    allowNull: false,
-    unique: true,
+    allowNull: false
   },
   number: {
     type: DataTypes.STRING(10),
@@ -28,32 +27,32 @@ module.exports = function(sequelize, DataTypes) {
     type: DataTypes.TEXT,
     allowNull: true
   },
-  like:{
-  	type: DataTypes.INTEGER(4),
+  like: {
+    type: DataTypes.INTEGER(4),
     allowNull: true
   },
-  likeIds:{
-  	type: DataTypes.TEXT,
+  likeIds: {
+    type: DataTypes.TEXT,
     allowNull: true
   },
-  dislike:{
-  	type: DataTypes.INTEGER(4),
+  dislike: {
+    type: DataTypes.INTEGER(4),
     allowNull: true
   },
-  dislikeIds:{
-  	type: DataTypes.TEXT,
+  dislikeIds: {
+    type: DataTypes.TEXT,
     allowNull: true
   },
-  proposer:{
-  	type: DataTypes.STRING(20),
+  proposer: {
+    type: DataTypes.STRING(20),
     allowNull: false
   },
-  proposerid:{
-  	type: DataTypes.STRING(30),
+  proposerid: {
+    type: DataTypes.STRING(30),
     allowNull: false,
   },
-  from:{
-  	type: DataTypes.STRING(20),
+  from: {
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
   createdAt: {
