@@ -1,2 +1,7 @@
+data.all                          get    /data/all                        
+data.getOne                       get    /data/get/:id                    
+data.index                        all    /data/                           
+data.search                       get    /data/search                     
+member.index                      all    /                                
 youmeb-api-angularjs.jsfile       all    /youmeb/youmeb-api-angular.js    
 youmeb-api-angularjs.minjsfile    all    /youmeb/youmeb-api-angular.min.js
