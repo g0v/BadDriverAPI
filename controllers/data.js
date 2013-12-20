@@ -1,9 +1,9 @@
 'use strict';
 
 
-module.exports = function ($youmeb) {
- var Data = $sequelize.model('data');
- 
+module.exports = function ($youmeb,$sequelize) {
+ var Data = $sequelize.model('datas');
+
   this.$({
     name: 'data',
     path: '/data'

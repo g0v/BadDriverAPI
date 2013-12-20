@@ -13,8 +13,7 @@ module.exports = {
           },
           urlid: {
             type: DataTypes.TEXT,
-            allowNull: false,
-            unique: true,
+            allowNull: false
           },
           number: {
             type: DataTypes.STRING(10),
@@ -32,31 +31,31 @@ module.exports = {
             type: DataTypes.TEXT,
             allowNull: true
           },
-          like:{
+          like: {
           	type: DataTypes.INTEGER(4),
             allowNull: true
           },
-          likeIds:{
+          likeIds: {
           	type: DataTypes.TEXT,
             allowNull: true
           },
-          dislike:{
+          dislike: {
           	type: DataTypes.INTEGER(4),
             allowNull: true
           },
-          dislikeIds:{
+          dislikeIds: {
           	type: DataTypes.TEXT,
             allowNull: true
           },
-          proposer:{
+          proposer: {
           	type: DataTypes.STRING(20),
             allowNull: false
           },
-          proposerid:{
+          proposerid: {
           	type: DataTypes.STRING(30),
             allowNull: false,
           },
-          from:{
+          from: {
           	type: DataTypes.STRING(20),
             allowNull: false,
           },

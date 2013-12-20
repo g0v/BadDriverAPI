@@ -11,33 +11,32 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
           },
-          name: {
-            type: DataTypes.TEXT,
+          thirdId: {
+            type: DataTypes.STRING(30),
             allowNull: false,
             unique: true
           },
+          name: {
+            type: DataTypes.STRING(20),
+            allowNull: false
+          },
           email: {
-          	type: DataTypes.TEXT,
-            allowNull: false,
-            unique: true
+          	type: DataTypes.STRING(30),
+            allowNull: false
           },
           from: {
             type: DataTypes.STRING(10),
             allowNull: false
           },
-          thirdId: {
-            type: DataTypes.STRING(30),
-            allowNull: false
-          },
-          updateFiles:{
+          updateFiles: {
           	type: DataTypes.TEXT,
             allowNull: false
           },
-          like:{
+          like: {
           	type: DataTypes.TEXT,
             allowNull: false
           },
-          dislike:{
+          dislike: {
           	type: DataTypes.TEXT,
             allowNull: false
           },
@@ -54,7 +53,6 @@ module.exports = {
       .success(done)
       .error(done);
   },
-
   down: function(migration, DataTypes, done) {
     // logic for reverting the changes
   }

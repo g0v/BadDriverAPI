@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = function ($youmeb) {
-   var Member = $sequelize.model('member');
+module.exports = function ($youmeb,$sequelize) {
+   var Member = $sequelize.model('members');
   this.$({
     name: 'member',
     path: '/member'
