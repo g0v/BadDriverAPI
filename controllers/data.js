@@ -24,7 +24,6 @@ module.exports = function ($youmeb,$sequelize) {
       res.send('data');
     }
   };
-
   this.add = {
     path: '/add',
     methods: ['post'],
@@ -55,18 +54,92 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/search',
     methods: ['get'],
     handler: function (req, res, next) {
-      res.send('data');
+      // res.send('data');
+      Data.find({where:{number:req.query.number},attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
+        if (d != null)
+          res.send({res:'success',data:d});
+        else
+          res.send({res:'failed',data:null})
+      });
     }
   };
   this.all = {
     path: '/all',
     methods: ['get'],
     handler: function (req, res, next) {
-      // res.send('data');
-      Data.findAll({attributes:['urlid','number','city','location','description','like','dislike']}).success(function(member){
-          // console.log(member);
-          res.send({res:'success',data:member});
+      Data.findAll({attributes:['id','urlid','number','city','location','description','like','dislike']}).success(function(d){
+        res.send({res:'success',data:d});
       });
     }
   };
+  this.like = {
+    path: '/like',
+    methods: ['get'],
+    handler: function (req, res, next) {
+      Member.find({where:{thirdId:req.query.userid,tk:req.query.tk}}).success(function(m){
+        // console.log(m)
+        if(m != null){
+          Data.find({where:{id:req.query.id},attributes:['likeIds','like']}).success(function(d){
+            console.log(d)
+            var _like = d.like + 1;
+            var check = 0;
+            if(d.likeIds == ''){
+              d.likeIds = []
+            }
+            for (i in d.likeIds){
+              if(i == req.query.userid)
+                check = 1
+            }
+            if(check != 1){
+              var _likeIds = d.likeIds.push(req.query.userid)
+              Data.update({like:_like,likeIds:_likeIds},{id:req.query.id}).success(function(_d){
+                res.send({res:'success',data:_d});
+              })  
+            }
+          });  
+        }else{
+           res.send({res:'failed'}) 
+        }
+      });
+    }
+  };
+  this.dislike = {
+    path: '/dislike',
+    methods: ['get'],
+    handler: function (req, res, next) {
+      Member.find({where:{thirdId:req.query.userid,tk:req.query.tk}}).success(function(m){
+        // console.log(m)
+        if(m != null){
+          Data.find({where:{id:req.query.id},attributes:['dislikeIds','dislike']}).success(function(d){
+            var _dislike = d.dislike + 1;
+            var check = 0;
+            if(d.dislikeIds == ''){
+              d.dislikeIds = []
+            };
+            for (i in d.dislikeIds){
+              if(i == req.query.userid)
+                check = 1
+            };
+            if(check != 1){
+              var _dislikeIds = d.dislikeIds.push(req.query.userid)
+              Data.update({dislike:_dislike,dislikeIds:_dislikeIds},{id:req.query.id}).success(function(_d){
+                res.send({res:'success',data:_d});
+              })  
+            }
+          });  
+        }else{
+           res.send({res:'failed'}) 
+        }
+      });
+    }
+  };
+  this.youtube = {
+    path: '/youtube/:id',
+    methods: ['get'],
+    handler: function (req, res, next) {
+      // Data.findAll({attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
+      //   res.send({res:'success',data:d});
+      // });
+    }
+  }
 };

@@ -1,10 +1,13 @@
-data.search                       get     /data/search                     
+data.like                         post    /data/like/:id                   
 member.getOne                     all     /member/get/:id                  
 data.index                        all     /data/                           
 data.getOne                       get     /data/get/:id                    
 data.add                          post    /data/add                        
-member.add                        post    /member/add                      
+data.search                       get     /data/search                     
 data.all                          get     /data/all                        
+member.add                        post    /member/add                      
+data.dislike                      get     /data/dislike                    
+data.youtube                      get     /data/youtube/:id                
 member.index                      all     /member/                         
 member.updatetk                   all     /member/update                   
 youmeb-api-angularjs.jsfile       all     /youmeb/youmeb-api-angular.js    
