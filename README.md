@@ -15,35 +15,36 @@ BadDriver f2e (Use Yeoman & AngularJS):
 3. `mkdir 'config'`
 4. `cd config`
 5. `vim default.json`
-  
-```javascript
-  {
-  "port": 3001,
-  "host": "localhost",
-  "controllers": "controllers",
-  "error": {
-    "format": "{level:1}{module:3}{code:2}",
-    "file": "errors"
-  },
-  "logger": {
-    "level": "debug",
-    "dir": "log",
-    "filename": "%s.log"
-  },
-  "packages": {
-      "sequelize": {
-          "db": "dbname",
-          "username": "user",
-          "password": "psd",
-          "options": {
-              "host": "router"
-          }
+    
+  ```javascript
+    {
+    "port": 3001,
+    "host": "localhost",
+    "controllers": "controllers",
+    "error": {
+      "format": "{level:1}{module:3}{code:2}",
+      "file": "errors"
+    },
+    "logger": {
+      "level": "debug",
+      "dir": "log",
+      "filename": "%s.log"
+    },
+    "packages": {
+        "sequelize": {
+            "db": "dbname",
+            "username": "user",
+            "password": "psd",
+            "options": {
+                "host": "router"
+            }
+        }
       }
     }
-  }
-  
-```
-6. `youmeb`
+    
+  ```
+6. `youmeb sequelize:migrate`
+7. `youmeb`
 
 
 
