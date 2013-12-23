@@ -4,6 +4,9 @@
 module.exports = function ($youmeb,$sequelize) {
   var Data = $sequelize.model('datas');
   var Member = $sequelize.model('members');
+  var youtube = require('youtube-feeds')
+  youtube.httpProtocol = 'https'
+
   this.$({
     name: 'data',
     path: '/data'
@@ -16,6 +19,7 @@ module.exports = function ($youmeb,$sequelize) {
       res.send('data');
     }
   };
+  
   this.getOne = {
     path: '/get/:id',
     methods: ['get'],
@@ -24,6 +28,7 @@ module.exports = function ($youmeb,$sequelize) {
       res.send('data');
     }
   };
+
   this.add = {
     path: '/add',
     methods: ['post'],
@@ -50,6 +55,7 @@ module.exports = function ($youmeb,$sequelize) {
       res.send('data');
     }
   };
+  
   this.search = {
     path: '/search',
     methods: ['get'],
@@ -63,6 +69,7 @@ module.exports = function ($youmeb,$sequelize) {
       });
     }
   };
+  
   this.all = {
     path: '/all',
     methods: ['get'],
@@ -72,6 +79,7 @@ module.exports = function ($youmeb,$sequelize) {
       });
     }
   };
+  
   this.like = {
     path: '/like',
     methods: ['get'],
@@ -103,6 +111,7 @@ module.exports = function ($youmeb,$sequelize) {
       });
     }
   };
+  
   this.dislike = {
     path: '/dislike',
     methods: ['get'],
@@ -133,10 +142,20 @@ module.exports = function ($youmeb,$sequelize) {
       });
     }
   };
+  
   this.youtube = {
-    path: '/youtube/:id',
+    path: '/youtube',
     methods: ['get'],
     handler: function (req, res, next) {
+      youtube.video(req.query.id).details( function( err, data ) {
+        if( err instanceof Error ) {
+          console.log( err )
+          res.send({res:'failed',data:err})
+        } else {
+          res.send({res:'success',data:data})
+        }
+      } 
+      )
       // Data.findAll({attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
       //   res.send({res:'success',data:d});
       // });

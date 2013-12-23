@@ -1,4 +1,4 @@
-data.like                         post    /data/like/:id                   
+data.like                         get     /data/like                       
 member.getOne                     all     /member/get/:id                  
 data.index                        all     /data/                           
 data.getOne                       get     /data/get/:id                    
