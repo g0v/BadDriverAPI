@@ -49,10 +49,10 @@ module.exports = function ($youmeb,$sequelize) {
           from: ''
         }).success(function(member){
           console.log(member);
-          res.send({res:'success',token:'123'});
+          res.send({res:'success'});
         });
       })
-      res.send('data');
+      // res.send('data');
     }
   };
   
@@ -61,7 +61,7 @@ module.exports = function ($youmeb,$sequelize) {
     methods: ['get'],
     handler: function (req, res, next) {
       // res.send('data');
-      Data.find({where:{number:req.query.number},attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
+      Data.findAll({where:{number:req.query.number},attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
         if (d != null)
           res.send({res:'success',data:d});
         else
@@ -149,7 +149,7 @@ module.exports = function ($youmeb,$sequelize) {
     handler: function (req, res, next) {
       youtube.video(req.query.id).details( function( err, data ) {
         if( err instanceof Error ) {
-          console.log( err )
+          //console.log( err )
           res.send({res:'failed',data:err})
         } else {
           res.send({res:'success',data:data})
