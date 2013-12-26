@@ -74,7 +74,7 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/all',
     methods: ['get'],
     handler: function (req, res, next) {
-      Data.findAll({attributes:['id','urlid','number','city','location','description','like','dislike']}).success(function(d){
+      Data.findAll({attributes:['id','urlid','number','city','location','description','like','dislike'],limit: 3}).success(function(d){
         res.send({res:'success',data:d});
       });
     }
