@@ -24,8 +24,10 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/get/:id',
     methods: ['get'],
     handler: function (req, res, next) {
-      console.log(req.params.id)
-      res.send('data');
+      Data.find({id:req.params.id,attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
+        res.send({res:'success',data:d});
+      });
+      // res.send('data');
     }
   };
 
@@ -34,7 +36,7 @@ module.exports = function ($youmeb,$sequelize) {
     methods: ['post'],
     handler: function (req, res, next) {
       Member.find({where:{id:req.body.id,tk: req.body.tk}}).success(function(d){
-        console.log(d)
+        // console.log(d)
         Data.findOrCreate({urlid: req.body.urlid},{
           number: req.body.number,
           city: req.body.city,
@@ -48,7 +50,6 @@ module.exports = function ($youmeb,$sequelize) {
           proposerid: '',
           from: ''
         }).success(function(member){
-          console.log(member);
           res.send({res:'success'});
         });
       })
@@ -97,7 +98,7 @@ module.exports = function ($youmeb,$sequelize) {
         // console.log(m)
         if(m != null){
           Data.find({where:{id:req.query.id},attributes:['likeIds','like']}).success(function(d){
-            console.log(d)
+            // console.log(d)
             var _like = d.like + 1;
             var check = 0;
             if(d.likeIds == ''){
