@@ -24,7 +24,8 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/get/:id',
     methods: ['get'],
     handler: function (req, res, next) {
-      Data.find({id:req.params.id,attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
+      console.log(req.params.id);
+      Data.find({where:{id:req.params.id},attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
         res.send({res:'success',data:d});
       });
       // res.send('data');
