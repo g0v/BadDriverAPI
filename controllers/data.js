@@ -133,7 +133,7 @@ module.exports = function ($youmeb,$sequelize) {
           Data.find({where:{id:req.body.id},attributes:['dislikeIds','dislike']}).success(function(d){
             var _dislike = d.dislike + 1;
             var check = 0;
-            console.log(d.dislikeIds);
+            d.dislikeIds = JSON.parse(d.dislikeIds);
             if(d.dislikeIds == ''){
               d.dislikeIds = []
             };
@@ -143,7 +143,8 @@ module.exports = function ($youmeb,$sequelize) {
             };
             if(check != 1){
               var _dislikeIds = d.dislikeIds.push(req.body.userid)
-              Data.update({dislike:_dislike,dislikeIds:_dislikeIds},{id:req.body.id}).success(function(_d){
+              var _dislikeIdsjson = JSON.stringify(_dislikeIds)
+              Data.update({dislike:_dislike,dislikeIds:_dislikeIdsjson},{id:req.body.id}).success(function(_d){
                 res.send({res:'success',data:_d});
               })  
             }
