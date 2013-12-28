@@ -149,7 +149,10 @@ module.exports = function ($youmeb,$sequelize) {
               Data.update({dislike:_dislike,dislikeIds:_dislikeIdsjson},{id:req.body.id}).success(function(_d){
                 res.send({res:'success',data:_d});
               })  
+            }else{
+              res.send({res:'voted'}) ;
             }
+
           });  
         }else{
            res.send({res:'failed'}) 
