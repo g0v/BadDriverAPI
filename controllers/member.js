@@ -39,7 +39,7 @@ module.exports = function ($youmeb,$sequelize) {
         from:req.body.thirdparty_type,
         updateFiles:'',
         like:'',
-        dislike:''
+        dislike:'',
         tK:'testtesttest'
       }).success(function(member){
         console.log(member);
