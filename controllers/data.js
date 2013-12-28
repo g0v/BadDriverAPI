@@ -95,10 +95,10 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/like',
     methods: ['get'],
     handler: function (req, res, next) {
-      Member.find({where:{thirdId:req.query.userid,tk:req.query.tk}}).success(function(m){
+      Member.find({where:{thirdId:req.body.userid,tk:req.body.tk}}).success(function(m){
         // console.log(m)
         if(m != null){
-          Data.find({where:{id:req.query.id},attributes:['likeIds','like']}).success(function(d){
+          Data.find({where:{id:req.body.id},attributes:['likeIds','like']}).success(function(d){
             // console.log(d)
             var _like = d.like + 1;
             var check = 0;
@@ -110,8 +110,8 @@ module.exports = function ($youmeb,$sequelize) {
                 check = 1
             }
             if(check != 1){
-              var _likeIds = d.likeIds.push(req.query.userid)
-              Data.update({like:_like,likeIds:_likeIds},{id:req.query.id}).success(function(_d){
+              var _likeIds = d.likeIds.push(req.body.userid)
+              Data.update({like:_like,likeIds:_likeIds},{id:req.body.id}).success(function(_d){
                 res.send({res:'success',data:_d});
               })  
             }
@@ -125,24 +125,24 @@ module.exports = function ($youmeb,$sequelize) {
   
   this.dislike = {
     path: '/dislike',
-    methods: ['get'],
+    methods: ['post'],
     handler: function (req, res, next) {
-      Member.find({where:{thirdId:req.query.userid,tk:req.query.tk}}).success(function(m){
+      Member.find({where:{thirdId:req.body.userid,tk:req.body.tk}}).success(function(m){
         // console.log(m)
         if(m != null){
-          Data.find({where:{id:req.query.id},attributes:['dislikeIds','dislike']}).success(function(d){
+          Data.find({where:{id:req.body.id},attributes:['dislikeIds','dislike']}).success(function(d){
             var _dislike = d.dislike + 1;
             var check = 0;
             if(d.dislikeIds == ''){
               d.dislikeIds = []
             };
             for (i in d.dislikeIds){
-              if(i == req.query.userid)
+              if(i == req.body.userid)
                 check = 1
             };
             if(check != 1){
-              var _dislikeIds = d.dislikeIds.push(req.query.userid)
-              Data.update({dislike:_dislike,dislikeIds:_dislikeIds},{id:req.query.id}).success(function(_d){
+              var _dislikeIds = d.dislikeIds.push(req.body.userid)
+              Data.update({dislike:_dislike,dislikeIds:_dislikeIds},{id:req.body.id}).success(function(_d){
                 res.send({res:'success',data:_d});
               })  
             }
