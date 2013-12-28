@@ -40,7 +40,7 @@ module.exports = function ($youmeb,$sequelize) {
         updateFiles:'',
         like:'',
         dislike:'',
-        tK:'testtesttest'
+        tk:'testtesttest'
       }).success(function(member){
         console.log(member);
         res.send({res:'success',token:'123'});
