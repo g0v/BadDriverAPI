@@ -133,17 +133,19 @@ module.exports = function ($youmeb,$sequelize) {
           Data.find({where:{id:req.body.id},attributes:['dislikeIds','dislike']}).success(function(d){
             var _dislike = d.dislike + 1;
             var check = 0;
-            d.dislikeIds = JSON.parse(d.dislikeIds);
             if(d.dislikeIds == ''){
-              d.dislikeIds = []
-            };
-            for (i in d.dislikeIds){
-              if(i == req.body.userid)
+              d.dislikeIds={}
+              d.dislikeIds.data = []
+            }else{
+              d.dislikeIds = JSON.parse(d.dislikeIds);
+            }
+            for (var _i =0;_i<d.dislikeIds.data.length;_i++){
+              if(d.dislikeIds.data[_i] == m.id)
                 check = 1
             };
             if(check != 1){
-              var _dislikeIds = d.dislikeIds.push(req.body.userid)
-              var _dislikeIdsjson = JSON.stringify(_dislikeIds)
+              d.dislikeIds.data.push(m.id);
+              var _dislikeIdsjson = JSON.stringify(d.dislikeIds);
               Data.update({dislike:_dislike,dislikeIds:_dislikeIdsjson},{id:req.body.id}).success(function(_d){
                 res.send({res:'success',data:_d});
               })  
