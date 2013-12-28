@@ -63,7 +63,7 @@ module.exports = function ($youmeb,$sequelize) {
     methods: ['get'],
     handler: function (req, res, next) {
       // res.send('data');
-      Data.findAll({where:{number:req.query.number},attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
+      Data.findAll({where:{number:req.query.number},attributes:['id','urlid','number','city','location','description','like','dislike']}).success(function(d){
         if (d != null)
           res.send({res:'success',data:d});
         else
