@@ -133,6 +133,7 @@ module.exports = function ($youmeb,$sequelize) {
           Data.find({where:{id:req.body.id},attributes:['dislikeIds','dislike']}).success(function(d){
             var _dislike = d.dislike + 1;
             var check = 0;
+            console.log(d.dislikeIds);
             if(d.dislikeIds == ''){
               d.dislikeIds = []
             };
