@@ -76,7 +76,7 @@ module.exports = function ($youmeb,$sequelize) {
 
   this.uploadimg = {
     path: '/upload/img',
-    methods: ['post'],
+    methods: ['all'],
     handler: function( req, res, next){
       var s3 = new AWS.S3();
       var _now = new Date();
