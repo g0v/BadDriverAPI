@@ -5,6 +5,12 @@ module.exports = function ($youmeb,$sequelize) {
   var Data = $sequelize.model('datas');
   var Member = $sequelize.model('members');
   var youtube = require('youtube-feeds')
+  
+  var AWS = require('aws-sdk');
+  var s3 = new AWS.S3();
+  var fs = require('fs');
+  AWS.config.loadFromPath('./config.json');
+
   youtube.httpProtocol = 'https'
 
   this.$({
@@ -57,7 +63,32 @@ module.exports = function ($youmeb,$sequelize) {
       // res.send('data');
     }
   };
-  
+
+  this.uploadimg = {
+    path: '/upload/img',
+    methods: ['post'],
+    handler: function( req, res, next){
+      var s3 = new AWS.S3();
+      var _now = new Date();
+      var sArray = req.files.file.name.split(/(.jpg|.gif|.png|.jpeg)/);
+      var _re = crypto.createHash('md5').update(sArray[0]+_now).digest("hex");
+      _re = _re+sArray[1];
+      fs.readFile('/'+req.files.file.path, function (_err, data) {
+          var params = {Bucket: 'baddriver',Key:_re,Body:data,ACL: 'public-read'};
+          s3.putObject(params, function (err, data) {
+            //console.log(err);
+            if (err) {
+            } else {
+              fs.unlink('/'+req.files.file.path, function() {
+                if (err) throw err;
+                res.send({n:_re});
+              });
+            }
+          });
+      });
+    }
+  };
+
   this.search = {
     path: '/search',
     methods: ['get'],
