@@ -9,6 +9,7 @@ module.exports = function (done) {
     app.set('view engine', 'jade');
     app.use(function(req, res, next) {
       res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
+      res.setHeader("Content-Type", "multipart/form-data");
       res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
       res.setHeader("Access-Control-Allow-Origin", "*");
       return next();
