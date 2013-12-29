@@ -10,6 +10,7 @@ module.exports = function ($youmeb,$sequelize) {
   var s3 = new AWS.S3();
   var fs = require('fs');
   AWS.config.loadFromPath('./config.json');
+  var crypto = require('crypto');
 
   youtube.httpProtocol = 'https'
 
@@ -30,8 +31,8 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/get/:id',
     methods: ['get'],
     handler: function (req, res, next) {
-      console.log(req.params.id);
-      Data.find({where:{id:req.params.id},attributes:['urlid','number','city','location','description','like','dislike']}).success(function(d){
+      // console.log(req.params.id);
+      Data.find({where:{id:req.params.id},attributes:['urlid','number','city','location','description','like','dislike','from','imgpool']}).success(function(d){
         res.send({res:'success',data:d});
       });
       // res.send('data');
@@ -43,7 +44,15 @@ module.exports = function ($youmeb,$sequelize) {
     methods: ['post'],
     handler: function (req, res, next) {
       Member.find({where:{id:req.body.id,tk: req.body.tk}}).success(function(d){
-        // console.log(d)
+        console.log(d)
+        if (req.body.urlid == 'none'){
+          req.body.urlid = new Date().getTime()+req.body.id
+          var imgpool = req.body.imgpool
+          var from = 'image'
+        }else{
+          var imgpool = ''
+          var from = 'youtube'
+        }
         Data.findOrCreate({urlid: req.body.urlid},{
           number: req.body.number,
           city: req.body.city,
@@ -54,8 +63,9 @@ module.exports = function ($youmeb,$sequelize) {
           dislike: '',
           dislikeIds: '',
           proposer: '',
-          proposerid: '',
-          from: ''
+          proposerid: req.body.id,
+          imgpool: imgpool,
+          from: from
         }).success(function(member){
           res.send({res:'success'});
         });
@@ -107,7 +117,7 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/all',
     methods: ['get'],
     handler: function (req, res, next) {
-      Data.findAll({attributes:['id','urlid','number','city','location','description','like','dislike']}).success(function(d){
+      Data.findAll({attributes:['id','urlid','number','city','location','description','like','dislike','from','imgpool']}).success(function(d){
         res.send({res:'success',data:d});
       });
     }
@@ -116,7 +126,7 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/last',
     methods: ['get'],
     handler: function (req, res, next) {
-      Data.findAll({attributes:['id','urlid','number','city','location','description','like','dislike'],limit: 3,order: 'id DESC'}).success(function(d){
+      Data.findAll({attributes:['id','urlid','number','city','location','description','like','dislike','from','imgpool'],limit: 3,order: 'id DESC'}).success(function(d){
         res.send({res:'success',data:d});
       });
     }

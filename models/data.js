@@ -55,6 +55,10 @@ module.exports = function(sequelize, DataTypes) {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
+  imgpool:{
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
   createdAt: {
     type: DataTypes.DATE
   },

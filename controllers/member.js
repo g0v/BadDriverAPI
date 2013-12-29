@@ -19,11 +19,11 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/update',
     methods: ['all'],
     handler: function (req, res, next) {
-      console.log(req.body.id)
+      // console.log(req.body.id)
       Member.update({tk:req.body.tk},{thirdId:req.body.id}).success(function(d){
-        console.log(d)
+        // console.log(d)
       }).error(function(e){
-        console.log(e)
+        // console.log(e)
       })
       res.send('member');
     }
@@ -42,7 +42,7 @@ module.exports = function ($youmeb,$sequelize) {
         dislike:'',
         tk:'testtesttest'
       }).success(function(member){
-        console.log(member);
+        // console.log(member);
         res.send({res:'success',token:'123'});
       })
       res.send('member');
@@ -52,7 +52,7 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/get/:id',
     methods: ['all'],
     handler: function (req, res, next) {
-      console.log(req.params.id)
+      // console.log(req.params.id)
       res.send('member');
     }
   };
