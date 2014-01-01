@@ -78,6 +78,7 @@ module.exports = function ($youmeb,$sequelize) {
     path: '/upload/img',
     methods: ['all'],
     handler: function( req, res, next){
+      console.log(req.files.file)
       var s3 = new AWS.S3();
       var _now = new Date();
       var sArray = req.files.file.name.split(/(.jpg|.gif|.png|.jpeg)/);
@@ -104,7 +105,7 @@ module.exports = function ($youmeb,$sequelize) {
     methods: ['get'],
     handler: function (req, res, next) {
       // res.send('data');
-      Data.findAll({where:{number:req.query.number},attributes:['id','urlid','number','city','location','description','like','dislike']}).success(function(d){
+      Data.findAll({where:{number:req.query.number},attributes:['id','urlid','number','city','location','description','like','dislike','from','imgpool']}).success(function(d){
         if (d != null)
           res.send({res:'success',data:d});
         else

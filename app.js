@@ -8,15 +8,10 @@ module.exports = function (done) {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(function(req, res, next) {
-      // res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
-      // res.setHeader("Content-Type", "multipart/form-data");
       res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.header('Access-Control-Allow-Credentials', true);
-      // res.header('Access-Control-Allow-Origin', req.headers.origin)
-      // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
       res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-      // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
       return next();
     });
     app.use(express.favicon());
